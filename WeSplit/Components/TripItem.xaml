@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="WeSplit.Components.TripItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeSplit.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Height="250" Width="300"
+             Loaded="UserControl_Loaded"
+             x:Name="userControl">
+    <UserControl.Resources>
+        <local:ThumbnailImageConverter x:Key="thumbnailImageConverter" />
+        <local:DateConverter x:Key="dateConverter" />
+    </UserControl.Resources>
+    <Grid Background="White">
+        <Grid.Effect>
+            <DropShadowEffect
+                    ShadowDepth="0"
+                    Color="Gray"
+                    Opacity="0"
+                    BlurRadius="15"
+                    x:Name="effect" />
+        </Grid.Effect>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush x:Name="bg" ImageSource="{Binding Converter={StaticResource thumbnailImageConverter}}" Stretch="UniformToFill">
+                    <ImageBrush.RelativeTransform>
+                        <ScaleTransform x:Name="scale" ScaleX="1" ScaleY="1" CenterX="0.5" CenterY="0.5" />
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Grid.Background>
+            <Grid.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="scale"
+                                             Storyboard.TargetProperty="ScaleX"
+                                             To="1.5"
+                                             Duration="0:0:0.1" />
+                            <DoubleAnimation Storyboard.TargetName="scale"
+                                             Storyboard.TargetProperty="ScaleY"
+                                             To="1.5"
+                                             Duration="0:0:0.1" />
+                            <DoubleAnimation Storyboard.TargetName="effect"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="1"
+                                             Duration="0:0:0.4" />
+                            <DoubleAnimation Storyboard.TargetName="bg"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0.7"
+                                             Duration="0:0:0.4" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             Storyboard.TargetName="bar"
+                                             To="1"
+                                             Duration="0:0:0.4" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             Storyboard.TargetName="title"
+                                             To="0"
+                                             Duration="0:0:0.1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="scale"
+                                             Storyboard.TargetProperty="ScaleX"
+                                             To="1"
+                                             Duration="0:0:0.1" />
+                            <DoubleAnimation Storyboard.TargetName="scale"
+                                             Storyboard.TargetProperty="ScaleY"
+                                             To="1"
+                                             Duration="0:0:0.1" />
+                            <DoubleAnimation Storyboard.TargetName="effect"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="0"
+                                             Duration="0:0:0.4" />
+                            <DoubleAnimation Storyboard.TargetName="bg"
+                                             Storyboard.TargetProperty="Opacity"
+                                             To="1"
+                                             Duration="0:0:0.4" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             Storyboard.TargetName="bar"
+                                             To="0"
+                                             Duration="0:0:0.2" />
+                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                             Storyboard.TargetName="title"
+                                             To="1"
+                                             Duration="0:0:0.3" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Grid.Triggers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Canvas Grid.Row="0" x:Name="isFinished"
+                           Visibility="Hidden">
+                <Border Canvas.Left="245"
+                        Canvas.Top="14"
+                        RenderTransformOrigin="0.5,0.5"
+                        BorderBrush="Red"
+                        BorderThickness="1"
+                        Background="#6fffffff">
+                    <Border.RenderTransform>
+                        <RotateTransform Angle="45"/>
+                    </Border.RenderTransform>
+                <TextBlock Text="Đã đi"
+                           RenderTransformOrigin="0.5,0.5"
+                           Foreground="Red"
+                           FontWeight="Bold"
+                           Padding="5"
+                           FontSize="16"
+                           >
+                </TextBlock>
+                </Border>
+            </Canvas>
+            <Grid Grid.Row="1" Grid.RowSpan="2" Background="#bfffffff" Opacity="0" Name="bar">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="3*" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Text="{Binding name}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           Foreground="Black" />
+                <TextBlock Grid.Row="1"
+                           Text="{Binding description}"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Center"
+                           FontSize="13"
+                           Margin="12"
+                           TextWrapping="Wrap"
+                           Foreground="Black" />
+            </Grid>
+            <StackPanel Grid.Row="2"
+                        Background="#bfffffff"
+                        Opacity="1"
+                        Name="title" 
+                        VerticalAlignment="Bottom">
+                <TextBlock Text="{Binding name}"
+                       TextAlignment="Center"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="Black" Margin="0, 10, 0, 10" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Source="pack://application:,,,/resources/clock.png" Width="20" Margin="0,0,0,10" />
+                    <TextBlock Margin="10,0,0,10" Text="{Binding departure_date, Converter={StaticResource dateConverter}}" Foreground="DarkBlue" FontWeight="Medium" FontSize="14" VerticalAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

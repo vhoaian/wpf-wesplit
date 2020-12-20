@@ -1,0 +1,252 @@
+﻿<UserControl x:Class="WeSplit.Components.TripManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeSplit.Components"
+             xmlns:global="clr-namespace:WeSplit"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserControl_Loaded"
+             x:Name="userControl">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="10,0,5,5">
+            <TextBlock Margin="3"
+                       FontSize="14">
+                Tên chuyến đi <Run Foreground="Red">(*)</Run>
+            </TextBlock>
+            <global:EnhancedTextbox
+                PlaceHolder="Tên chuyến đi"
+                x:Name="nameTextbox"
+                Margin="0, 5"/>
+
+            <TextBlock Margin="3"
+                       FontSize="14">
+                Địa điểm <Run Foreground="Red">(*)</Run>
+            </TextBlock>
+
+
+            <Grid VerticalAlignment="Center">
+                <ComboBox Background="White"
+                              BorderThickness="0"
+                              FontSize="14"
+                              Padding="5, 9"
+                              ItemsSource="{Binding Places, ElementName=userControl}"
+                              x:Name="placeCombo">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                [DD<Run Text="{Binding id}" />]
+                                <Run Text="{Binding name}" />
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock Text="Chọn địa điểm"
+                               IsHitTestVisible="False"
+                               FontSize="14"
+                               Padding="5, 9">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Hidden" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=placeCombo, Path=SelectedIndex}" Value="-1">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+
+
+
+            <TextBlock Margin="3"
+                       FontSize="14">
+                Mô tả chuyến đi <Run Foreground="Red">(*)</Run>
+            </TextBlock>
+            <global:EnhancedTextbox
+                IsMultiline="True"
+                PlaceHolder="Mô tả chuyến đi"
+                Height="170"
+                Margin="0, 5"
+                x:Name="descTextbox" />
+
+            <TextBlock Margin="3"
+                       FontSize="14">
+                Ngày đi <Run Foreground="Red">(*)</Run>
+            </TextBlock>
+            <DatePicker IsTodayHighlighted="True"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Margin="0, 5"
+                        SelectedDate="{x:Static sys:DateTime.Now}"
+                        x:Name="departureDate" />
+
+            <TextBlock Margin="3"
+                       FontSize="14">
+                Ngày về <Run Foreground="Red">(*)</Run>
+            </TextBlock>
+            <DatePicker IsTodayHighlighted="True"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Margin="0, 5"
+                        SelectedDate="{x:Static sys:DateTime.Now}"
+                        x:Name="returnDate" />
+
+            <global:EnhancedButton Text="Lưu thông tin chuyến đi"
+                                   FontSize="16"
+                                   Type="Success"
+                                   Margin="10"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   x:Name="saveAllButton"
+                                   Click="saveAllButton_Click" />
+        </StackPanel>
+        
+        <Grid Grid.Column="1" Margin="5,0,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock 
+                       Foreground="White"
+                       Margin="0,10,0,0"
+                       Padding="10,5"
+                       Background="#cc0a1172"
+                       TextAlignment="Center"
+                       FontSize="20"
+                       FontWeight="SemiBold">
+                    Lộ trình (<Run Text="{Binding RestStops.Count, ElementName=userControl, Mode=OneWay}"/>)
+            </TextBlock>
+            <StackPanel Grid.Row="2">
+                <global:EnhancedTextbox PlaceHolder="Tên điểm dừng chân"
+                                        x:Name="restName"
+                                        Margin="5, 8" />
+                <global:EnhancedButton Text="Thêm lộ trình" HorizontalAlignment="Center" x:Name="addRestButton" Click="addRestButton_Click" />
+            </StackPanel>
+            <ListView Name="placeList" Background="#aaffffff" Grid.Row="1" ItemsSource="{Binding RestStops, ElementName=userControl}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Focusable" Value="false" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding name}" FontSize="16" Padding="5" Foreground="Blue" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="2" Margin="5,0,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Foreground="White"
+                       Margin="0,10,0,0"
+                       Padding="10,5"
+                       Background="#cc0a1172"
+                       TextAlignment="Center"
+                       FontSize="20"
+                       FontWeight="SemiBold">
+                    Thành viên tham gia (<Run Text="{Binding Joinings.Count, ElementName=userControl, Mode=OneWay}" />)
+            </TextBlock>
+
+            <ListView Name="memberList" Background="#aaffffff" Grid.Row="1" ItemsSource="{Binding Joinings, ElementName=userControl}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Focusable" Value="false" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock FontSize="16" Padding="5" Foreground="Blue">
+                            [TV<Run Text="{Binding Member.id}" />] <Run Text="{Binding Member.name}" />
+                            <TextBlock.ToolTip>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}Tiền ứng ban đầu: {0:F0}">
+                                            <Binding Path="advance_deposit"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </TextBlock.ToolTip>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid VerticalAlignment="Center">
+                    <ComboBox Background="White"
+                              BorderThickness="0"
+                              FontSize="14"
+                              Padding="5, 9"
+                              ItemsSource="{Binding Members, ElementName=userControl}"
+                              x:Name="memberCombo">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    [TV<Run Text="{Binding id}" />] <Run Text="{Binding name}" />
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBlock Text="Chọn thành viên"
+                               IsHitTestVisible="False"
+                               FontSize="14"
+                               Padding="5, 9">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Hidden" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=memberCombo, Path=SelectedIndex}" Value="-1">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+                
+                <Grid Grid.Row="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <global:EnhancedTextbox PlaceHolder="Số tiền ứng ban đầu" x:Name="deposit" />
+                    <global:EnhancedButton Text="Thêm" Margin="8,3"
+                                           HorizontalAlignment="Center"
+                                           Grid.Column="1"
+                                           x:Name="addmemButton"
+                                           Click="addmemButton_Click" />
+                </Grid>
+
+                <global:EnhancedButton Grid.Row="2"
+                                       Type="Secondary"
+                                       Margin="5"
+                                       Text="Thêm thành viên mới"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Click="EnhancedButton_Click"/>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</UserControl>

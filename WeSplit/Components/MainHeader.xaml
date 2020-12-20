@@ -1,0 +1,189 @@
+﻿<UserControl x:Class="WeSplit.Components.MainHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeSplit.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="WeSplit" FontSize="28" FontWeight="ExtraBold" Foreground="DarkBlue" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize" To="36" Duration="0:0:0.1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize" To="28" Duration="0:0:0.1" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Tag="0" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Grid.Column="1" Padding="10" Text="CHUYẾN ĐI" FontSize="15" Foreground="Blue" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock.Background>
+                <SolidColorBrush Color="Transparent" />
+            </TextBlock.Background>
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="LightGray" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="Transparent" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Tag="1" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Grid.Column="2" Padding="10" Text="TÌM KIẾM" FontSize="15" Foreground="Blue" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock.Background>
+                <SolidColorBrush Color="Transparent" />
+            </TextBlock.Background>
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="LightGray" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="Transparent" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Tag="2" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Grid.Column="3" Padding="10" Text="ĐỊA ĐIỂM" FontSize="15" Foreground="Blue" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock.Background>
+                <SolidColorBrush Color="Transparent" />
+            </TextBlock.Background>
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="LightGray" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="Transparent" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Tag="3" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Grid.Column="4" Padding="10" Text="THÀNH VIÊN" FontSize="15" Foreground="Blue" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock.Background>
+                <SolidColorBrush Color="Transparent" />
+            </TextBlock.Background>
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="LightGray" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="Transparent" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Tag="4" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Grid.Column="5" Padding="10" Text="TẠO CHUYẾN ĐI" FontSize="15" Foreground="Green" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock.Background>
+                <SolidColorBrush Color="Transparent" />
+            </TextBlock.Background>
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="LightGray" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="Transparent" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+        <TextBlock Tag="5" MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Cursor="Hand" Grid.Column="6" Padding="10" Text="CÀI ĐẶT" FontSize="15" Foreground="Blue" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock.Background>
+                <SolidColorBrush Color="Transparent" />
+            </TextBlock.Background>
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="LightGray" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation
+                                Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                To="Transparent" Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+
+    </Grid>
+</UserControl>

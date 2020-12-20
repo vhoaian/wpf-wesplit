@@ -1,0 +1,43 @@
+﻿<Window x:Class="WeSplit.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeSplit"
+        xmlns:component="clr-namespace:WeSplit.Components"
+        mc:Ignorable="d"
+        Title="WeSplit" Height="750" Width="900"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush RenderOptions.BitmapScalingMode="HighQuality"
+                        ImageSource="pack://application:,,,/resources/bg.jpg"
+                        Stretch="Fill"
+                        Opacity="0.8" />
+        </Grid.Background>
+        <!--<local:EnhancedTextbox PlaceHolder="Nhập họ tên..." FontSize="15" Width="300" Margin="5" />
+        <TextBox Width="50" />
+        <local:EnhancedButton Cursor="Pen" Type="Danger" Click="EnhancedButton_Click" Text="Hello123" HorizontalAlignment="Center" FontSize="16" Margin="20" MyPadding="10" />
+        <local:EnhancedOutlinedButton Type="Success" Click="EnhancedButton_Click" Text="Hello123" HorizontalAlignment="Center" FontSize="16" Margin="20" MyPadding="10" />-->
+        <component:MainHeader Grid.Row="0" OnChange="MainHeader_OnChange" />
+        <ContentControl Content="{Binding UserControl}" Grid.Row="1" />
+            <!--<WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <component:TripItem Margin="10" />
+            </WrapPanel>-->
+            
+            <!--<StackPanel>
+                <local:EnhancedTextbox PlaceHolder="Nhập họ tên..." Width="200" Height="40" Margin="10" />
+                <local:EnhancedTextbox PlaceHolder="Nhập họ tên..." Width="200" Height="40" />
+            </StackPanel>-->
+            <!--<local:Pagination x:Name="pagination" onSwitch="Pagination_onSwitch" Total="25" Current="10" HorizontalAlignment="Center" />-->
+
+            <!--<component:SearchBar x:Name="list" List="{Binding}" Width="600" Submit="SearchBar_Submit" />-->
+            <!--<component:TripManagement />-->
+            
+            
+    </Grid>
+</Window>

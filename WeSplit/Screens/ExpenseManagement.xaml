@@ -1,0 +1,107 @@
+﻿<Window x:Class="WeSplit.Screens.ExpenseManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeSplit.Screens"
+        xmlns:global="clr-namespace:WeSplit"
+        mc:Ignorable="d"
+        Title="Quản lý chi tiêu" Height="700" Width="700"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+        x:Name="window">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Foreground="White"
+                Margin="0,10,0,0"
+                Padding="10,5"
+                Background="#cc0a1172"
+                TextAlignment="Center"
+                FontSize="20"
+                FontWeight="SemiBold"
+                x:Name="titleTextblock">
+                Quản lý chi tiêu
+        </TextBlock>
+        <ScrollViewer x:Name="scrollViewer"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto"
+                      Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding Expenses, ElementName=window}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="60" Background="#11000000" Margin="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" 
+                                       FontSize="15"
+                                       FontWeight="Bold"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Text="{Binding expense, StringFormat={}{0:F0}}" />
+                            <TextBlock Grid.Column="1" 
+                                       Text="{Binding description}"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       Margin="5,10"
+                                       />
+                            <global:EnhancedButton Type="Danger"
+                                                   Text="Xoá chi tiêu"
+                                                   Tag="{Binding id}"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Grid.Column="2"
+                                                   x:Name="deleteButton"
+                                                   Click="deleteButton_Click"
+                                                   />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <StackPanel Grid.Row="2">
+            <global:EnhancedTextbox
+                PlaceHolder="Nhập số tiền chi tiêu"
+                x:Name="moneyTextbox"
+                Margin="7" />
+            <global:EnhancedTextbox
+                PlaceHolder="Nhập nội dung chi tiêu"
+                IsMultiline="True"
+                Height="100"
+                Margin="7"
+                x:Name="descTextbox"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <global:EnhancedButton
+                    Background="Transparent"
+                    Type="Success"
+                    Text="Thêm chi tiêu"
+                    x:Name="createButton"
+                    Click="createButton_Click"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="10,0"/>
+                <global:EnhancedButton
+                    Grid.Column="1"
+                    Background="Transparent"
+                    Text="Tổng kết chuyến đi"
+                    x:Name="summaryButton"
+                    Click="summaryButton_Click"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="10,0"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

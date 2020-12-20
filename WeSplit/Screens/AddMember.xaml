@@ -1,0 +1,45 @@
+﻿<Window x:Class="WeSplit.Screens.AddMember"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeSplit.Screens"
+        xmlns:global="clr-namespace:WeSplit"
+        mc:Ignorable="d"
+        Title="Thành viên" Height="500" Width="600"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel Margin="5">
+        <TextBlock Foreground="White"
+                   Margin="0,10,0,0"
+                   Padding="10,5"
+                   Background="#cc0a1172"
+                   TextAlignment="Center"
+                   FontSize="20"
+                   FontWeight="SemiBold"
+                   x:Name="titleTextblock">
+                   Thông tin thành viên
+        </TextBlock>
+        <global:EnhancedTextbox PlaceHolder="Tên thành viên"
+                                    Margin="5" x:Name="nameTextbox" />
+        <global:EnhancedTextbox PlaceHolder="Số di động"
+                                    Margin="5" x:Name="phoneTextbox" />
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Padding="5" Text="Thêm ảnh đại diện" FontSize="14" />
+            <Image Grid.Column="1" Source="/resources/add-image.png"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Height="200"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                   x:Name="avatarImage"
+                   MouseDown="avatarImage_MouseDown" />
+        </Grid>
+        <WrapPanel HorizontalAlignment="Center" Margin="10">
+            <global:EnhancedButton Margin="5" Text="Lưu thành viên" x:Name="submitButton" Click="submitButton_Click" />
+            <global:EnhancedButton Type="Danger" Margin="5" Text="Nhập lại" x:Name="clearButton" Click="clearButton_Click" />
+        </WrapPanel>
+    </StackPanel>
+</Window>

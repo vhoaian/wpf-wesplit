@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="WeSplit.Components.TripList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WeSplit.Components"
+             xmlns:global="clr-namespace:WeSplit"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="UserControl_Loaded"
+             x:Name="userControl">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding CurrentTrips, ElementName=userControl}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:TripItem Id="{Binding id}" Margin="5" MouseLeftButtonDown="TripItem_MouseLeftButtonDown" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <global:Pagination Grid.Row="1"
+                           Total="{Binding TotalPage, ElementName=userControl}"
+                           HorizontalAlignment="Center"
+                           onSwitch="Pagination_onSwitch"
+                           Current="{Binding CurrentPage, ElementName=userControl}" />
+    </Grid>
+</UserControl>

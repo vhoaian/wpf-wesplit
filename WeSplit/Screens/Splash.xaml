@@ -1,0 +1,65 @@
+﻿<Window x:Class="WeSplit.Screens.Splash"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeSplit.Screens"
+        mc:Ignorable="d"
+        Title="Splash" Height="450" Width="800"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded" ResizeMode="CanResizeWithGrip" AllowsTransparency="True">
+    <Window.Resources>
+        <local:PlaceRandomImageConverter x:Key="placeRandomImageConverter" />
+    </Window.Resources>
+    <Grid Background="White">
+        <Grid.Effect>
+            <DropShadowEffect
+                    ShadowDepth="0"
+                    Color="Gray"
+                    Opacity="0"
+                    BlurRadius="15"
+                    x:Name="effect" />
+        </Grid.Effect>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush x:Name="bg" ImageSource="{Binding Place, Converter={StaticResource placeRandomImageConverter}}" Stretch="UniformToFill">
+                    <ImageBrush.RelativeTransform>
+                        <ScaleTransform x:Name="scale" ScaleX="1" ScaleY="1" CenterX="0.5" CenterY="0.5" />
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <DockPanel Margin="10" Background="#aaffffff"
+                       LastChildFill="True">
+                <CheckBox Content="Không hiện hộp thoại này lần sau"
+                          DockPanel.Dock="Bottom"
+                          Margin="10,20"
+                          FontSize="13"
+                          Checked="CheckBox_Checked"/>
+                <StackPanel>
+                    <TextBlock Text="{Binding Place.name}"
+                               FontSize="20"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="10"
+                               FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Place.description}"
+                           FontSize="15"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           FontWeight="Normal"
+                           Padding="20"/>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>
